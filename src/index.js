@@ -16,6 +16,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { basename: "/trogir-2024/" },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
