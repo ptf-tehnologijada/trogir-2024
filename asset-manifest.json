@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/trogir-2024/static/css/main.04e87950.css",
+    "main.js": "/trogir-2024/static/js/main.d7bf7d0f.js",
+    "static/js/787.1e5d9954.chunk.js": "/trogir-2024/static/js/787.1e5d9954.chunk.js",
+    "index.html": "/trogir-2024/index.html",
+    "main.04e87950.css.map": "/trogir-2024/static/css/main.04e87950.css.map",
+    "main.d7bf7d0f.js.map": "/trogir-2024/static/js/main.d7bf7d0f.js.map",
+    "787.1e5d9954.chunk.js.map": "/trogir-2024/static/js/787.1e5d9954.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04e87950.css",
+    "static/js/main.d7bf7d0f.js"
+  ]
+}
