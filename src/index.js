@@ -9,9 +9,10 @@ import MainPage from "./app/mainPage/MainPage";
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    path: "/",
     children: [
       {
-        path: "/volleyball",
+        path: "/",
         element: <MainPage />,
       },
     ],
