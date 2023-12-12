@@ -8,11 +8,14 @@ import MainPage from "./app/mainPage/MainPage";
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
     path: "/",
+    element: <MainPage />,
+  },
+  {
+    element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/volleyball",
         element: <MainPage />,
       },
     ],
