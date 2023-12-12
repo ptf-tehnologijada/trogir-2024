@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.04e87950.css",
-    "main.js": "/static/js/main.18efbcd1.js",
-    "static/js/787.1e5d9954.chunk.js": "/static/js/787.1e5d9954.chunk.js",
-    "index.html": "/index.html",
-    "main.04e87950.css.map": "/static/css/main.04e87950.css.map",
-    "main.18efbcd1.js.map": "/static/js/main.18efbcd1.js.map",
-    "787.1e5d9954.chunk.js.map": "/static/js/787.1e5d9954.chunk.js.map"
+    "main.css": "/trogir-2024/static/css/main.04e87950.css",
+    "main.js": "/trogir-2024/static/js/main.e2a12723.js",
+    "static/js/787.1e5d9954.chunk.js": "/trogir-2024/static/js/787.1e5d9954.chunk.js",
+    "index.html": "/trogir-2024/index.html",
+    "main.04e87950.css.map": "/trogir-2024/static/css/main.04e87950.css.map",
+    "main.e2a12723.js.map": "/trogir-2024/static/js/main.e2a12723.js.map",
+    "787.1e5d9954.chunk.js.map": "/trogir-2024/static/js/787.1e5d9954.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.04e87950.css",
-    "static/js/main.18efbcd1.js"
+    "static/js/main.e2a12723.js"
   ]
 }
