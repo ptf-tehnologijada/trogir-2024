@@ -6,21 +6,24 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./app/shared/Layout";
 import MainPage from "./app/mainPage/MainPage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainPage />,
-  },
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: "/volleyball",
-        element: <MainPage />,
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <MainPage />,
+    },
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/volleyball",
+          element: <MainPage />,
+        },
+      ],
+    },
+  ],
+  { basename: "/trogir-2024/" }
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
