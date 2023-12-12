@@ -13,7 +13,10 @@ const router = createBrowserRouter(
       element: <MainPage />,
     },
     {
-      basename: "/trogir-2024/",
+      path: "/test",
+      element: <MainPage />,
+    },
+    {
       element: <Layout />,
       children: [
         {
@@ -29,7 +32,7 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider basename="/trogir-2024/" router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
