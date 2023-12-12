@@ -9,12 +9,13 @@ import MainPage from "./app/mainPage/MainPage";
 const router = createBrowserRouter(
   [
     {
-      path: "/",
-      element: <MainPage />,
-    },
-    {
-      path: "/test",
-      element: <MainPage />,
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <div>Asd</div>,
+        },
+      ],
     },
     {
       element: <Layout />,

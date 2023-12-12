@@ -1,13 +1,21 @@
 import { Outlet } from "react-router-dom";
 import "./Layout.scss";
+import { useNavigate } from "react-router-dom";
 
 const Layout = () => {
+  const navigate = useNavigate();
+
+  const viewProfile = () => {
+    navigate("/volleyball");
+  };
+
   return (
     <>
       <div id="c-app">
         <div id="c-app__main">
           <div id="c-app__main__navigation">
             <svg
+              onClick={viewProfile}
               class="c-app__main__navigation__item"
               width="24px"
               height="24px"
