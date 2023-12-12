@@ -13,6 +13,7 @@ const router = createBrowserRouter(
       element: <MainPage />,
     },
     {
+      basename: "/trogir-2024/",
       element: <Layout />,
       children: [
         {
