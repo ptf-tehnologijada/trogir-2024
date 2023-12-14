@@ -189,61 +189,69 @@ const MainPage = () => {
 
         <div className="test">
           <table>
-            <tr>
-              <th>S1</th>
-              <th>Pobjeda</th>
-              <th>Bodovi</th>
-            </tr>
-            <tr>
-              <td>FKKT</td>
-              <td>3</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td>KTF</td>
-              <td>2</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>PBF</td>
-              <td>1</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>FKIT</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>S1</th>
+                <th>Pobjeda</th>
+                <th>Bodovi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FKKT</td>
+                <td>3</td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <td>KTF</td>
+                <td>2</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>PBF</td>
+                <td>1</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>FKIT</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+            </tbody>
           </table>
         </div>
 
         <div className="test">
           <table>
-            <tr>
-              <th>S2</th>
-              <th>Pobjeda</th>
-              <th>Bodovi</th>
-            </tr>
-            <tr>
-              <td>MF</td>
-              <td>3</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td>TTF</td>
-              <td>2</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>PTF</td>
-              <td>1</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>GRF</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>S2</th>
+                <th>Pobjeda</th>
+                <th>Bodovi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MF</td>
+                <td>3</td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <td>TTF</td>
+                <td>2</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>PTF</td>
+                <td>1</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>GRF</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+            </tbody>
           </table>
         </div>
 
@@ -251,9 +259,10 @@ const MainPage = () => {
         <div className="test">
           <div
             style={{
-              backgroundColor: "#1068c9",
+              backgroundColor: "#203f8b",
               padding: "2px 16px",
-              borderRadius: "8px",
+              borderTopRightRadius: "8px",
+              borderTopLeftRadius: "8px",
             }}
           >
             <p style={{ color: "white", textAlign: "center" }}>
@@ -273,9 +282,10 @@ const MainPage = () => {
         <div className="test">
           <div
             style={{
-              backgroundColor: "#1068c9",
+              backgroundColor: "#203f8b",
               padding: "2px 16px",
-              borderRadius: "8px",
+              borderTopRightRadius: "8px",
+              borderTopLeftRadius: "8px",
             }}
           >
             <p style={{ color: "white", textAlign: "center" }}>
@@ -295,9 +305,10 @@ const MainPage = () => {
         <div className="test">
           <div
             style={{
-              backgroundColor: "#1068c9",
+              backgroundColor: "#203f8b",
               padding: "2px 16px",
-              borderRadius: "8px",
+              borderTopRightRadius: "8px",
+              borderTopLeftRadius: "8px",
             }}
           >
             <p style={{ color: "white", textAlign: "center" }}>
@@ -316,9 +327,10 @@ const MainPage = () => {
         <div className="test">
           <div
             style={{
-              backgroundColor: "#1068c9",
+              backgroundColor: "#203f8b",
               padding: "2px 16px",
-              borderRadius: "8px",
+              borderTopRightRadius: "8px",
+              borderTopLeftRadius: "8px",
             }}
           >
             <p style={{ color: "white", textAlign: "center" }}>
@@ -338,9 +350,10 @@ const MainPage = () => {
         <div className="test">
           <div
             style={{
-              backgroundColor: "#1068c9",
+              backgroundColor: "#203f8b",
               padding: "2px 16px",
-              borderRadius: "8px",
+              borderTopRightRadius: "8px",
+              borderTopLeftRadius: "8px",
             }}
           >
             <p style={{ color: "white", textAlign: "center" }}>
@@ -360,9 +373,10 @@ const MainPage = () => {
         <div className="test">
           <div
             style={{
-              backgroundColor: "#1068c9",
+              backgroundColor: "#203f8b",
               padding: "2px 16px",
-              borderRadius: "8px",
+              borderTopRightRadius: "8px",
+              borderTopLeftRadius: "8px",
             }}
           >
             <p style={{ color: "white", textAlign: "center" }}>
