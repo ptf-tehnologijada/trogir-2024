@@ -1,1 +1,28 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(1) {
+  background-color: #1c78db22;
+}
+
+td:first-child {
+  background-color: #1c78db22;
+  font-weight: 700;
+}
+
+.test {
+  margin-bottom: 16px;
+  padding: 16px 16px;
+  box-shadow: 0px 0px 8px 0px rgba(130, 128, 130, 1);
+  border-radius: 8px;
+}

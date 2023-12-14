@@ -168,7 +168,7 @@ const Layout = () => {
             </svg>
           </div>
           <div id="c-app__main__content">
-            <div id="c-app__main__content__box">
+            <div>
               <Outlet />
             </div>
           </div>
