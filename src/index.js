@@ -3,8 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./app/shared/Layout";
-import MainPage from "./app/mainPage/MainPage";
+import Layout from "./app/shared/layout/Layout";
+import Volleyball from "./app/volleyball/Volleyball";
+import Futsal from "./app/futsal/Futsal";
+import PingPong from "./app/pingPong/PingPong";
+import Basketball from "./app/basketball/Basketball";
 
 const router = createBrowserRouter(
   [
@@ -22,7 +25,19 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/odbojka",
-          element: <MainPage />,
+          element: <Volleyball />,
+        },
+        {
+          path: "/futsal",
+          element: <Futsal />,
+        },
+        {
+          path: "/stolni-tenis",
+          element: <PingPong />,
+        },
+        {
+          path: "/kosarka",
+          element: <Basketball />,
         },
       ],
     },

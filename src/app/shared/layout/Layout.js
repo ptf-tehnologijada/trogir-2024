@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 const Layout = () => {
   const navigate = useNavigate();
 
-  const viewProfile = () => {
-    navigate("/volleyball");
+  const goToPage = (path) => {
+    navigate(path);
   };
 
   return (
@@ -15,7 +15,7 @@ const Layout = () => {
         <div id="c-app__main">
           <div id="c-app__main__navigation">
             <svg
-              onClick={viewProfile}
+              onClick={() => goToPage("/odbojka")}
               class="c-app__main__navigation__item"
               width="24px"
               height="24px"
@@ -38,6 +38,7 @@ const Layout = () => {
               </g>
             </svg>
             <svg
+              onClick={() => goToPage("/stolni-tenis")}
               fill="#ffffff"
               class="c-app__main__navigation__item"
               width="24px"
@@ -60,6 +61,7 @@ const Layout = () => {
               </g>
             </svg>
             <svg
+              onClick={() => goToPage("/sah")}
               class="c-app__main__navigation__item"
               width="24px"
               height="24px"
@@ -86,6 +88,7 @@ const Layout = () => {
               </g>
             </svg>
             <svg
+              onClick={() => goToPage("/kosarka")}
               fill="#ffffff"
               class="c-app__main__navigation__item"
               width="24px"
@@ -104,6 +107,7 @@ const Layout = () => {
               </g>
             </svg>
             <svg
+              onClick={() => goToPage("/futsal")}
               class="c-app__main__navigation__item"
               width="24px"
               height="24px"
@@ -127,6 +131,7 @@ const Layout = () => {
               </g>
             </svg>
             <svg
+              onClick={() => goToPage("/kros")}
               class="c-app__main__navigation__item"
               width="24px"
               height="24px"
@@ -146,6 +151,7 @@ const Layout = () => {
               </g>
             </svg>
             <svg
+              onClick={() => goToPage("/plivanje")}
               fill="#ffffff"
               class="c-app__main__navigation__item"
               width="24px"

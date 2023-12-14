@@ -1,0 +1,23 @@
+.c-result-card {
+  margin-bottom: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 2px solid #203f8b;
+
+  &__header {
+    background-color: #203f8b;
+    padding: 2px 16px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+
+    &-text {
+      color: white;
+      text-align: "center";
+    }
+  }
+
+  &__result {
+    padding: 2px 16px;
+  }
+}

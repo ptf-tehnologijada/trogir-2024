@@ -2,6 +2,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   border-top-left-radius: 8px;
+  margin-bottom: 16px;
 }
 
 thead tr {
@@ -12,6 +13,7 @@ thead tr {
 
 thead th:first-child {
   border-top-left-radius: 8px;
+  width: 100px;
 }
 
 thead th:last-child {
@@ -37,12 +39,4 @@ tbody tr:nth-of-type(even) {
 
 tbody tr:last-of-type {
   border-bottom: 2px solid #203f8b;
-}
-
-.test {
-  margin-bottom: 16px;
-
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
 }
