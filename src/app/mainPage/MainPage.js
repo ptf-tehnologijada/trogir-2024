@@ -313,6 +313,27 @@ const MainPage = () => {
             <p>Vasi: -</p>
           </div>
         </div>
+        <div className="test">
+          <div
+            style={{
+              backgroundColor: "#1068c9",
+              padding: "2px 16px",
+              borderRadius: "8px",
+            }}
+          >
+            <p style={{ color: "white", textAlign: "center" }}>
+              3.5.2024. 17:00h
+            </p>
+          </div>
+          <div
+            style={{
+              padding: "2px 16px",
+            }}
+          >
+            <p>Nasi: -</p>
+            <p>Vasi: -</p>
+          </div>
+        </div>
         <h2>Za 3. mjesto</h2>
         <div className="test">
           <div
