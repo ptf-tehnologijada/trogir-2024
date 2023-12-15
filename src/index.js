@@ -8,6 +8,8 @@ import Volleyball from "./app/volleyball/Volleyball";
 import Futsal from "./app/futsal/Futsal";
 import PingPong from "./app/pingPong/PingPong";
 import Basketball from "./app/basketball/Basketball";
+import Cross from "./app/cross/Cross";
+import Swimming from "./app/swimming/Swimming";
 
 const router = createBrowserRouter(
   [
@@ -16,13 +18,8 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/",
-          element: <div>Asd</div>,
+          element: <div>Dobrodosli</div>,
         },
-      ],
-    },
-    {
-      element: <Layout />,
-      children: [
         {
           path: "/odbojka",
           element: <Volleyball />,
@@ -38,6 +35,14 @@ const router = createBrowserRouter(
         {
           path: "/kosarka",
           element: <Basketball />,
+        },
+        {
+          path: "/kros",
+          element: <Cross />,
+        },
+        {
+          path: "/plivanje",
+          element: <Swimming />,
         },
       ],
     },

@@ -21,13 +21,9 @@ const PingPong = () => {
       <div>
         <h1>Stolni tenis</h1>
 
-        <div className="test">
-          <Table data={s1} />
-        </div>
+        <Table data={s1} />
 
-        <div className="test">
-          <Table data={s2} />
-        </div>
+        <Table data={s2} />
 
         <h2>Za 7. mjesto</h2>
         <ResultCard />
