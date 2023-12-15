@@ -10,6 +10,7 @@ import PingPong from "./app/pingPong/PingPong";
 import Basketball from "./app/basketball/Basketball";
 import Cross from "./app/cross/Cross";
 import Swimming from "./app/swimming/Swimming";
+import AdminLogin from "./app/adminLogin/AdminLogin";
 
 const router = createBrowserRouter(
   [
@@ -45,6 +46,10 @@ const router = createBrowserRouter(
           element: <Swimming />,
         },
       ],
+    },
+    {
+      path: "admin",
+      element: <AdminLogin />,
     },
   ],
   { basename: "/trogir-2024/" }

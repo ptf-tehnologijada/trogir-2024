@@ -1,0 +1,53 @@
+.login-form {
+  background: linear-gradient(45deg, #203f8b, #1c78db);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__card {
+    background: white;
+    border-radius: 8px;
+    width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    &__card {
+      background: white;
+      border-radius: 8px;
+      width: 710px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      animation-name: pop-in;
+      animation-duration: 1s;
+      animation-timing-function: ease-in;
+    }
+  }
+
+  &__input {
+    padding: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  &__action {
+    padding-top: 16px;
+    align-self: flex-end;
+  }
+
+  @keyframes pop-in {
+    0% {
+      width: 450px;
+    }
+    100% {
+      width: 710px;
+    }
+  }
+}

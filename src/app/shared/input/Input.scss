@@ -1,0 +1,12 @@
+.c-input {
+  height: 24px;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: black;
+
+  &:focus {
+    border-width: 0 0 1px;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #1c78db, #1c78db);
+  }
+}
