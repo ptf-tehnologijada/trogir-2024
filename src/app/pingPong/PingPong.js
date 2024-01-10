@@ -1,5 +1,5 @@
-import ResultCard from "../shared/resultCard/ResultCard";
-import Table from "../shared/table/Table";
+import ResultCard from "../shared/components/resultCard/ResultCard";
+import Table from "../shared/components/table/Table";
 
 const PingPong = () => {
   const s1 = [

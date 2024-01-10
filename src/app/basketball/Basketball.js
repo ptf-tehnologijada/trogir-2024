@@ -1,27 +1,51 @@
-import ResultCard from "../shared/resultCard/ResultCard";
-import Table from "../shared/table/Table";
+import ResultCard from "../shared/components/resultCard/ResultCard";
+import Table from "../shared/components/table/Table";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { FsContext } from "../../index";
 
 const Basketball = () => {
-  const s1 = [
-    { faculty: "FKIT", wins: "2", points: "4" },
-    { faculty: "KTF", wins: "1", points: "2" },
-    { faculty: "PBF", wins: "1", points: "2" },
-    { faculty: "FKIT", wins: "0", points: "0" },
-  ];
+  const [data, setData] = useState([]);
 
-  const s2 = [
-    { faculty: "MF", wins: "2", points: "4" },
-    { faculty: "TTF", wins: "1", points: "2" },
-    { faculty: "PTF", wins: "1", points: "2" },
-    { faculty: "GRF", wins: "0", points: "0" },
-  ];
+  const app = useContext(FsContext);
+
+  const db = getFirestore(app);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "basketball"));
+
+        const fetchedData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        const groupedData = Object.groupBy(
+          fetchedData,
+          ({ matchNum }) => matchNum
+        );
+
+        setData(groupedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [db]);
+
+  const s1 = [];
+
+  const s2 = [];
 
   return (
     <>
       <div>
         <h1>{`Košarka (M)`}</h1>
 
-        <Table data={s1} />
+        <Table data={data["1"]} />
 
         <Table data={s2} />
 

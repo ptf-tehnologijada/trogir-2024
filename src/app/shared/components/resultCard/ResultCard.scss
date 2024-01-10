@@ -19,5 +19,10 @@
 
   &__result {
     padding: 2px 16px;
+
+    &--winner {
+      font-weight: 700;
+      font-size: 18px;
+    }
   }
 }

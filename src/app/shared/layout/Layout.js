@@ -1,12 +1,40 @@
 import { Outlet } from "react-router-dom";
 import "./Layout.scss";
 import { useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
-const Layout = () => {
+const Layout = ({ isAdmin = false }) => {
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const uid = user.uid;
+      console.log("uid");
+      // ...
+    } else {
+      if (isAdmin) {
+        navigate("/");
+      }
+    }
+  });
+
   const navigate = useNavigate();
 
   const goToPage = (path) => {
     navigate(path);
+  };
+
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
   };
 
   return (
@@ -16,18 +44,18 @@ const Layout = () => {
           <div id="c-app__main__navigation">
             <svg
               onClick={() => goToPage("/odbojka")}
-              class="c-app__main__navigation__item"
+              className="c-app__main__navigation__item"
               width="24px"
               height="24px"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {" "}
@@ -40,21 +68,20 @@ const Layout = () => {
             <svg
               onClick={() => goToPage("/stolni-tenis")}
               fill="#ffffff"
-              class="c-app__main__navigation__item"
+              className="c-app__main__navigation__item"
               width="24px"
               height="24px"
               viewBox="-1.92 -1.92 27.84 27.84"
               id="Layer_1"
-              data-name="Layer 1"
               xmlns="http://www.w3.org/2000/svg"
               stroke="#ffffff"
-              stroke-width="0.00024000000000000003"
+              strokeWidth="0.00024000000000000003"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 <path d="M21.261,2.739A9.836,9.836,0,0,0,8.3,2.114,4.489,4.489,0,1,0,4.134,8.963a9.415,9.415,0,0,0,.842,5.668.5.5,0,0,1-.07.564L2,16.945A3.743,3.743,0,0,0,3.735,24a3.891,3.891,0,0,0,.457-.027,3.705,3.705,0,0,0,2.725-1.735l2.068-3.127a.5.5,0,0,1,.575-.089,9.663,9.663,0,0,0,11.315-2.147A10.5,10.5,0,0,0,24,9.758,9.409,9.409,0,0,0,21.261,2.739ZM2,4.5A2.5,2.5,0,1,1,4.5,7,2.5,2.5,0,0,1,2,4.5Zm8.44,12.726a2.494,2.494,0,0,0-3.017.632c-.024.029-.046.059-.067.09L5.229,21.166A1.742,1.742,0,0,1,2.02,20a1.76,1.76,0,0,1,.961-1.312l3.041-1.831a.956.956,0,0,0,.126-.09,2.49,2.49,0,0,0,.623-3.016,7.331,7.331,0,0,1-.693-4.259l8.433,8.433A7.31,7.31,0,0,1,10.44,17.226Zm9.021-1.765a8.871,8.871,0,0,1-2.732,1.865c-.009-.01-.012-.023-.022-.033L7.36,7.945A4.473,4.473,0,0,0,9,4.5c0-.119-.026-.231-.035-.347a8.01,8.01,0,0,1,10.882,0A7.423,7.423,0,0,1,22,9.7,8.506,8.506,0,0,1,19.461,15.461Z"></path>
@@ -62,26 +89,26 @@ const Layout = () => {
             </svg>
             <svg
               onClick={() => goToPage("/sah")}
-              class="c-app__main__navigation__item"
+              className="c-app__main__navigation__item"
               width="24px"
               height="24px"
               viewBox="-0.96 -0.96 25.92 25.92"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               stroke="#ffffff"
-              stroke-width="0.00024000000000000003"
+              strokeWidth="0.00024000000000000003"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {" "}
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M9.5 6.5C9.5 5.11929 10.6193 4 12 4C13.3807 4 14.5 5.11929 14.5 6.5C14.5 7.88071 13.3807 9 12 9C10.6193 9 9.5 7.88071 9.5 6.5ZM12 2C9.51472 2 7.5 4.01472 7.5 6.5C7.5 7.91363 8.15183 9.17502 9.17133 10H8C7.44772 10 7 10.4477 7 11C7 11.5523 7.44772 12 8 12H9.12533C9.15208 12.3659 9.16098 12.833 9.11237 13.3535C8.99568 14.6027 8.55656 16.0909 7.31094 17.2753C6.86615 17.6982 6.19221 18.1531 5.58717 18.5199C5.29266 18.6984 5.02896 18.8475 4.83934 18.9517C4.74472 19.0037 4.66905 19.0442 4.61781 19.0713L4.56008 19.1017L4.54633 19.1088L4.54347 19.1103L4.54336 19.1103L4.54322 19.1104C4.3106 19.2299 4.13401 19.4357 4.05132 19.6838L3.27924 22H3C2.44772 22 2 22.4477 2 23C2 23.5523 2.44772 24 3 24H4H20H21C21.5523 24 22 23.5523 22 23C22 22.4477 21.5523 22 21 22H20.7659L20.1559 19.7395C20.0787 19.4533 19.8784 19.2161 19.6092 19.0919L19.609 19.0918L19.6072 19.091L19.5951 19.0853C19.5836 19.0799 19.5655 19.0714 19.5415 19.0598C19.4933 19.0366 19.4214 19.0014 19.3304 18.9553C19.1482 18.8629 18.8918 18.7279 18.5996 18.5595C18.0041 18.2164 17.3055 17.7605 16.7767 17.2682C15.5139 16.0923 15.054 14.6022 14.92 13.349C14.8647 12.8316 14.8667 12.3662 14.8878 12H16C16.5523 12 17 11.5523 17 11C17 10.4477 16.5523 10 16 10H14.8287C15.8482 9.17502 16.5 7.91363 16.5 6.5C16.5 4.01472 14.4853 2 12 2ZM11.1037 13.5395C11.158 12.9576 11.1549 12.4315 11.1296 12H12.8852C12.8649 12.4363 12.8682 12.9705 12.9313 13.5616C13.0971 15.112 13.6847 17.1218 15.4138 18.7319C15.512 18.8233 15.6134 18.9128 15.717 19L8.38107 19C8.48825 18.9094 8.59149 18.8175 8.68906 18.7247C10.3982 17.0996 10.9591 15.0879 11.1037 13.5395ZM5.72076 21L18.4246 21L18.6944 22H5.38743L5.72076 21Z"
                   fill="#ffffff"
                 ></path>{" "}
@@ -90,17 +117,17 @@ const Layout = () => {
             <svg
               onClick={() => goToPage("/kosarka")}
               fill="#ffffff"
-              class="c-app__main__navigation__item"
+              className="c-app__main__navigation__item"
               width="24px"
               height="24px"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 <path d="M23,3V17a1,1,0,0,1-1,1H20a1,1,0,0,1,0-2h1V4H3V16H4a1,1,0,0,1,0,2H2a1,1,0,0,1-1-1V3A1,1,0,0,1,2,2H22A1,1,0,0,1,23,3ZM15.005,20.9l.09-.9H13v1a1,1,0,0,1-2,0V20H8.9l.09.9A1,1,0,0,1,8.1,22,.875.875,0,0,1,8,22a1,1,0,0,1-.994-.9L6.1,12H6a1,1,0,0,1,0-2H18a1,1,0,0,1,0,2h-.095L17,21.1A1,1,0,0,1,16,22a.875.875,0,0,1-.1,0A1,1,0,0,1,15.005,20.9ZM11,16H8.505l.2,2H11Zm0-4H8.105l.2,2H11Zm2,2h2.7l.2-2H13Zm2.3,4,.2-2H13v2Z"></path>
@@ -108,20 +135,20 @@ const Layout = () => {
             </svg>
             <svg
               onClick={() => goToPage("/futsal")}
-              class="c-app__main__navigation__item"
+              className="c-app__main__navigation__item"
               width="24px"
               height="24px"
               viewBox="0 0 512 512"
               xmlns="http://www.w3.org/2000/svg"
               fill="#ffffff"
               stroke="#ffffff"
-              stroke-width="0.00512"
+              strokeWidth="0.00512"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 <path
@@ -132,18 +159,18 @@ const Layout = () => {
             </svg>
             <svg
               onClick={() => goToPage("/kros")}
-              class="c-app__main__navigation__item"
+              className="c-app__main__navigation__item"
               width="24px"
               height="24px"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
               fill="#ffffff"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 <path d="M12.1 3A1.9 1.9 0 1 1 14 4.9 1.898 1.898 0 0 1 12.1 3zm2.568 4.893c.26-1.262-1.399-1.861-2.894-2.385L7.09 6.71l.577 4.154c0 .708 1.611.489 1.587-.049l-.39-2.71 2.628-.48-.998 4.92 3.602 4.179-1.469 4.463a.95.95 0 0 0 .39 1.294c.523.196 1.124-.207 1.486-.923.052-.104 1.904-5.127 1.904-5.127l-2.818-3.236 1.08-5.303zm-5.974 8.848l-3.234.528a1.033 1.033 0 0 0-.752 1.158c.035.539.737.88 1.315.802l3.36-.662 2.54-2.831-1.174-1.361zm8.605-7.74l-1.954.578-.374 1.837 2.865-.781a.881.881 0 0 0-.537-1.633z"></path>
@@ -153,7 +180,7 @@ const Layout = () => {
             <svg
               onClick={() => goToPage("/plivanje")}
               fill="#ffffff"
-              class="c-app__main__navigation__item"
+              className="c-app__main__navigation__item"
               width="24px"
               height="24px"
               viewBox="0 0 50 50"
@@ -162,16 +189,17 @@ const Layout = () => {
               xmlns="http://www.w3.org/2000/svg"
               overflow="inherit"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 <path d="M49 40c-1.051 0-2.052-.232-2.952-.641-.917-.414-1.956-.664-3.042-.664-1.091 0-2.131.252-3.049.664-.899.409-1.901.641-2.953.641-1.05 0-2.056-.232-2.95-.641-.933-.414-1.974-.664-3.048-.664-1.087 0-2.128.252-3.049.664-.895.409-1.912.641-2.953.641-1.052 0-2.053-.232-2.96-.641-.921-.414-1.958-.664-3.036-.664-1.087 0-2.127.252-3.048.664-.895.409-1.912.641-2.964.641-1.036 0-2.053-.232-2.948-.641-.921-.414-1.962-.664-3.048-.664-1.079 0-2.114.252-3.037.664-.909.409-1.911.641-2.963.641v-4.396c1.051 0 2.053-.238 2.963-.631.923-.424 1.958-.674 3.037-.674 1.086 0 2.127.25 3.048.674.895.393 1.912.631 2.948.631 1.051 0 2.069-.238 2.964-.631.92-.424 1.961-.674 3.048-.674 1.078 0 2.114.25 3.036.674.907.393 1.908.631 2.96.631 1.041 0 2.057-.238 2.953-.631.921-.424 1.962-.674 3.049-.674 1.073 0 2.113.25 3.048.674.895.393 1.9.631 2.95.631 1.052 0 2.054-.238 2.953-.631.918-.424 1.958-.674 3.049-.674 1.086 0 2.125.25 3.042.674.9.393 1.901.631 2.952.631v4.396zm-6.952-12.436c3.152 0 5.71-2.55 5.71-5.678 0-3.131-2.558-5.668-5.71-5.668-3.157 0-5.712 2.538-5.712 5.668 0 3.128 2.328 5.678 5.712 5.678zm-33.257 3.192c.443.105.861.258 1.258.436.895.402 1.912.641 2.949.641 1.05 0 2.069-.238 2.963-.641.921-.414 1.961-.676 3.048-.676 1.078 0 2.116.262 3.036.676.906.402 1.908.641 2.96.641 1.04 0 2.058-.238 2.952-.641.922-.414 1.962-.676 3.049-.676 1.074 0 2.115.262 3.048.676.896.402 1.9.641 2.952.641.765 0 1.502-.129 2.197-.346l-9.525-17.056 11.079-2.007c1.626-.308 2.806-1.576 2.806-3.199 0-1.79-1.467-3.225-3.262-3.225l-.37.011-17.114 3.092c-1.201.273-2.792 2.019-1.886 4.161l.146.345 4.466 8.003-16.752 9.144z"></path>
               </g>
             </svg>
+            {isAdmin && <p onClick={logOut}>S.O.</p>}
           </div>
           <div id="c-app__main__content">
             <div>

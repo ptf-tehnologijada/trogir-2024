@@ -1,4 +1,4 @@
-import Table from "../shared/table/Table";
+import Table from "../shared/components/table/Table";
 
 export default function Cross() {
   const dataMen = [

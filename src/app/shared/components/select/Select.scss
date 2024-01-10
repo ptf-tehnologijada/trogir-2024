@@ -1,0 +1,15 @@
+.c-select {
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: black;
+  width: 100%;
+
+  &:focus {
+    border-width: 0 0 1px;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #1c78db, #1c78db);
+  }
+}

@@ -1,0 +1,80 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border-top-left-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+thead tr {
+  background-color: #203f8b;
+  color: #ffffff;
+  text-align: left;
+}
+
+thead th:first-child {
+  border-top-left-radius: 8px;
+  width: 100px;
+}
+
+thead th:last-child {
+  border-top-right-radius: 8px;
+}
+
+td,
+th {
+  padding: 12px 15px;
+}
+
+tbody {
+  border: 1px solid #dddddd;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+  border-bottom: 2px solid #203f8b;
+}
+
+.modal-container {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px 16px;
+}
+
+.modal-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+@media screen and (min-width: 840px) {
+  .modal-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 700px;
+    padding: 32px 16px;
+  }
+}
+
+.react-datetime-picker {
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__wrapper {
+    border: none !important;
+    border-bottom: 1px solid black !important;
+  }
+}

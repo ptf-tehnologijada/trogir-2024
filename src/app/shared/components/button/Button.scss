@@ -26,6 +26,26 @@
     }
   }
 
+  &--ternary {
+    color: black;
+    background-color: white;
+    padding: 8px 16px;
+
+    &:active {
+      background-color: whitesmoke;
+    }
+  }
+
+  &--danger {
+    color: white;
+    background-color: rgb(181, 47, 47);
+    padding: 8px 16px;
+
+    &:active {
+      background-color: rgb(191, 57, 37);
+    }
+  }
+
   &:hover {
     cursor: pointer;
     opacity: 0.9;

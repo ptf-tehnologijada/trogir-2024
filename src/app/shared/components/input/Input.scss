@@ -1,8 +1,11 @@
 .c-input {
+  display: flex;
+  flex-direction: column;
   height: 24px;
   outline: 0;
   border-width: 0 0 1px;
   border-color: black;
+  width: 100%;
 
   &:focus {
     border-width: 0 0 1px;
