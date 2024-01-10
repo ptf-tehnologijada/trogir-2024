@@ -40,6 +40,8 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
 
   getAuth();
 
+  console.log(data);
+
   const onChange = (e, propName) => {
     setModel({
       ...model,
@@ -149,6 +151,7 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
         </thead>
         <tbody>
           {data &&
+            data.length &&
             data.map((item) => {
               return (
                 <tr key={item.id}>

@@ -17,13 +17,11 @@ export default function AdminLogin() {
     signInWithEmailAndPassword(auth, nickname, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
         // ...
         navigate("/admin/odbojka");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error);
       });
   };
 
