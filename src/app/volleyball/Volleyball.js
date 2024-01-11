@@ -42,6 +42,7 @@ const Volleyball = () => {
               (item) => item.groupNum === groupEnum.firstGroup
             )}
             showAdditional={true}
+            hideDraw={true}
           />
         )}
 
@@ -57,6 +58,7 @@ const Volleyball = () => {
               (item) => item.groupNum === groupEnum.secondGroup
             )}
             showAdditional={true}
+            hideDraw={true}
           />
         )}
 

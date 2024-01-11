@@ -41,6 +41,7 @@ const PingPong = () => {
             matches={data[matchEnum.groupStage].filter(
               (item) => item.groupNum === groupEnum.firstGroup
             )}
+            hideDraw={true}
           />
         )}
 
@@ -56,6 +57,7 @@ const PingPong = () => {
             matches={data[matchEnum.groupStage].filter(
               (item) => item.groupNum === groupEnum.secondGroup
             )}
+            hideDraw={true}
           />
         )}
 

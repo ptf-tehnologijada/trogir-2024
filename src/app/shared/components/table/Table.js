@@ -10,6 +10,7 @@ export default function Table({
   tag,
   isOnePerson = false,
   showAdditional = false,
+  hideDraw = false,
 }) {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
 
@@ -22,7 +23,7 @@ export default function Table({
             {isOnePerson && <th>Sportaš/ica</th>}
             {isOnePerson && <th>Vrijeme</th>}
             {!isOnePerson && <th>W</th>}
-            {!isOnePerson && <th>D</th>}
+            {!isOnePerson && !hideDraw && <th>D</th>}
             {!isOnePerson && <th>P</th>}
           </tr>
         </thead>
@@ -41,7 +42,7 @@ export default function Table({
                   )}
                   {isOnePerson && <td>{item.time}</td>}
                   {!isOnePerson && <td>{item.wins}</td>}
-                  {!isOnePerson && <td>{item.draws}</td>}
+                  {!isOnePerson && !hideDraw && <td>{item.draws}</td>}
                   {!isOnePerson && <td>{item.points}</td>}
                 </tr>
               );
