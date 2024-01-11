@@ -21,9 +21,9 @@ export default function Table({
             {isOnePerson ? <th>Fakultet</th> : <th>{tag}</th>}
             {isOnePerson && <th>Sportaš/ica</th>}
             {isOnePerson && <th>Vrijeme</th>}
-            {!isOnePerson && <th>Pobjeda</th>}
-            {!isOnePerson && <th>Neriješeno</th>}
-            {!isOnePerson && <th>Bodovi</th>}
+            {!isOnePerson && <th>W</th>}
+            {!isOnePerson && <th>D</th>}
+            {!isOnePerson && <th>P</th>}
           </tr>
         </thead>
         <tbody>
