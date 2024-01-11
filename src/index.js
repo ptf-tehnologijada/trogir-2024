@@ -24,11 +24,11 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
 };
 
-const app = initializeApp(process.env);
+const app = initializeApp(firebaseConfig);
 
 export const FsContext = createContext(app);
 
-console.log("fbc:   ", firebaseConfig);
+console.log("env:   ", process.env);
 
 const router = createBrowserRouter(
   [
