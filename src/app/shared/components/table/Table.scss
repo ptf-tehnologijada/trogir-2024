@@ -2,7 +2,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   border-top-left-radius: 8px;
-  margin-bottom: 16px;
+  margin-top: 16px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -40,4 +40,16 @@ tbody tr:nth-of-type(even) {
 
 tbody tr:last-of-type {
   border-bottom: 2px solid #203f8b;
+}
+
+.c-additional {
+  &__action {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__modal {
+    padding: 32px 0;
+    width: 270px;
+  }
 }

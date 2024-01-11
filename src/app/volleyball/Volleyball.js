@@ -8,6 +8,7 @@ import { calculateTotalPoints } from "../shared/utils/calculateTotalPoints";
 import { matchEnum } from "../shared/constants/matchEnum";
 import { groupEnum } from "../shared/constants/groupEnum";
 import { fetchData } from "../shared/hooks/useFetchData";
+import { mockData } from "../shared/models/mockData";
 
 const Volleyball = () => {
   const [data, setData] = useState(null);
@@ -21,7 +22,7 @@ const Volleyball = () => {
   }, [db]);
 
   useEffect(() => {
-    fetchData(db, "volleyball", setData);
+    fetchData(db, "volleyball", setData, mockData);
   }, [db, getData]);
 
   return (
@@ -31,21 +32,31 @@ const Volleyball = () => {
 
         {data && (
           <Table
+            tag="G1"
             data={calculateTotalPoints(
               data[matchEnum.groupStage].filter(
                 (item) => item.groupNum === groupEnum.firstGroup
               )
             )}
+            matches={data[matchEnum.groupStage].filter(
+              (item) => item.groupNum === groupEnum.firstGroup
+            )}
+            showAdditional={true}
           />
         )}
 
         {data && (
           <Table
+            tag="G2"
             data={calculateTotalPoints(
               data[matchEnum.groupStage].filter(
                 (item) => item.groupNum === groupEnum.secondGroup
               )
             )}
+            matches={data[matchEnum.groupStage].filter(
+              (item) => item.groupNum === groupEnum.secondGroup
+            )}
+            showAdditional={true}
           />
         )}
 

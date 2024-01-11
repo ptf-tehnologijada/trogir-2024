@@ -1,90 +1,157 @@
 import ResultCard from "../shared/components/resultCard/ResultCard";
 import Table from "../shared/components/table/Table";
-import { getFirestore, getDocs, collection } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { getFirestore } from "firebase/firestore";
+import { useState, useEffect, useCallback } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
+import { calculateTotalPoints } from "../shared/utils/calculateTotalPoints";
+import { matchEnum } from "../shared/constants/matchEnum";
+import { groupEnum } from "../shared/constants/groupEnum";
+import { fetchData } from "../shared/hooks/useFetchData";
 
 const Basketball = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   const app = useContext(FsContext);
 
   const db = getFirestore(app);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "basketball"));
-
-        const fetchedData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        const groupedData = Object.groupBy(
-          fetchedData,
-          ({ matchNum }) => matchNum
-        );
-
-        setData(groupedData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+  const getData = useCallback(() => {
+    fetchData(db, "basketball", setData);
   }, [db]);
 
-  const s1 = [];
-
-  const s2 = [];
+  useEffect(() => {
+    fetchData(db, "basketball", setData, true);
+  }, [db, getData]);
 
   return (
     <>
       <div>
         <h1>{`Košarka (M)`}</h1>
 
-        <Table data={data["1"]} />
+        {data && (
+          <Table
+            tag="G1"
+            data={calculateTotalPoints(
+              data[matchEnum.groupStage].filter(
+                (item) => item.groupNum === groupEnum.firstGroup
+              )
+            )}
+            showAdditional={true}
+            matches={data[matchEnum.groupStage].filter(
+              (item) => item.groupNum === groupEnum.firstGroup
+            )}
+          />
+        )}
 
-        <Table data={s2} />
+        {data && (
+          <Table
+            tag="G2"
+            data={calculateTotalPoints(
+              data[matchEnum.groupStage].filter(
+                (item) => item.groupNum === groupEnum.secondGroup
+              )
+            )}
+            showAdditional={true}
+            matches={data[matchEnum.groupStage].filter(
+              (item) => item.groupNum === groupEnum.secondGroup
+            )}
+          />
+        )}
 
         <h2>Za 7. mjesto</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.seventhPlace].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Za 5. mjesto</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.fiftPlace].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Polufinale</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.semifinal].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Za 3. mjesto</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.thirdPlace].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Finale</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.final].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
       </div>
+
       <div>
         <h1>{`Košarka (Ž)`}</h1>
 
-        <Table data={s1} />
+        {data && (
+          <Table
+            tag="G1"
+            data={calculateTotalPoints(
+              data[matchEnum.groupStage].filter(
+                (item) => item.groupNum === groupEnum.firstGroup
+              )
+            )}
+            showAdditional={true}
+            matches={data[matchEnum.groupStage].filter(
+              (item) => item.groupNum === groupEnum.firstGroup
+            )}
+          />
+        )}
 
-        <Table data={s2} />
+        {data && (
+          <Table
+            tag="G2"
+            data={calculateTotalPoints(
+              data[matchEnum.groupStage].filter(
+                (item) => item.groupNum === groupEnum.secondGroup
+              )
+            )}
+            showAdditional={true}
+            matches={data[matchEnum.groupStage].filter(
+              (item) => item.groupNum === groupEnum.secondGroup
+            )}
+          />
+        )}
 
         <h2>Za 7. mjesto</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.seventhPlace].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Za 5. mjesto</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.fiftPlace].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Polufinale</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.semifinal].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Za 3. mjesto</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.thirdPlace].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
 
         <h2>Finale</h2>
-        <ResultCard />
+        {data &&
+          data[matchEnum.final].map((item) => (
+            <ResultCard key={item.id} data={item} />
+          ))}
       </div>
     </>
   );
