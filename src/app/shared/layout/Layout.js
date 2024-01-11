@@ -1,21 +1,21 @@
 import { Outlet } from "react-router-dom";
 import "./Layout.scss";
 import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 
 const Layout = ({ isAdmin = false }) => {
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      // ...
-    } else {
-      if (isAdmin) {
-        navigate("/");
-      }
-    }
-  });
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     // User is signed in, see docs for a list of available properties
+  //     // https://firebase.google.com/docs/reference/js/auth.user
+  //     // ...
+  //   } else {
+  //     if (isAdmin) {
+  //       navigate("/");
+  //     }
+  //   }
+  // });
 
   const navigate = useNavigate();
 
