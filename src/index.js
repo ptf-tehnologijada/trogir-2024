@@ -24,6 +24,8 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
 };
 
+console.log("fbc: ", firebaseConfig);
+
 const app = initializeApp(firebaseConfig);
 
 export const FsContext = createContext(app);

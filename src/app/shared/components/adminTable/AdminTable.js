@@ -40,8 +40,6 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
 
   getAuth();
 
-  console.log(data);
-
   const onChange = (e, propName) => {
     setModel({
       ...model,
