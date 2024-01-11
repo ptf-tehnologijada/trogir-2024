@@ -28,8 +28,6 @@ const app = initializeApp(firebaseConfig);
 
 export const FsContext = createContext(app);
 
-console.log("env:   ", process.env);
-
 const router = createBrowserRouter(
   [
     {
