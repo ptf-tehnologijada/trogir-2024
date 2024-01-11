@@ -6,7 +6,7 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
 
@@ -55,11 +55,7 @@ const AdminVolleyball = () => {
     },
   ];
 
-  useEffect(() => {
-    fetchData();
-  }, [db]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const querySnapshot = await getDocs(
         query(collection(db, "volleyball"), orderBy("matchNum", "asc"))
@@ -74,7 +70,11 @@ const AdminVolleyball = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, [db]);
+
+  useEffect(() => {
+    fetchData();
+  }, [db, fetchData]);
 
   return (
     <>

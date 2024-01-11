@@ -151,7 +151,6 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
         </thead>
         <tbody>
           {data &&
-            data.length &&
             data.map((item) => {
               return (
                 <tr key={item.id}>
