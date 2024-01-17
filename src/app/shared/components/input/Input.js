@@ -4,7 +4,7 @@ export default function Input(props) {
   return (
     <>
       <div>
-        <label for={props.id}>{props.label}:</label>
+        <label htmlFor={props.id}>{props.label}:</label>
         <input
           id={props.id}
           className={"c-input"}
@@ -14,6 +14,7 @@ export default function Input(props) {
           value={props.value}
           onChange={props.onChange}
           onKeyDown={props.onKeyDown}
+          checked={props.checked}
         />
       </div>
     </>

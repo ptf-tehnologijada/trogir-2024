@@ -21,7 +21,7 @@ const PingPong = () => {
   }, [db]);
 
   useEffect(() => {
-    fetchData(db, "ping_pong", setData, true);
+    fetchData(db, "ping_pong", setData, false, true);
   }, [db, getData]);
 
   return (

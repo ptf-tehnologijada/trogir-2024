@@ -23,12 +23,22 @@ import { getAuth } from "firebase/auth";
 import { entryModel } from "../../models/entryModel";
 import { groups } from "../../constants/groupOptions";
 import { matches } from "../../constants/matchOptions";
+import { types } from "../../constants/typeOptions";
 import ConfirmModal from "../confirmModal/ConfirmModal";
 
-export default function AdminTable({ dataMapping, data, fetchFunction }) {
+export default function AdminTable({
+  dataMapping,
+  data,
+  fetchFunction,
+  path,
+  genderSelect = false,
+  gender = 1,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [model, setModel] = useState(entryModel);
+  const [model, setModel] = useState(
+    !genderSelect ? entryModel : { ...entryModel, gender: gender }
+  );
   const [selectedId, setSelectedId] = useState("");
 
   const app = useContext(FsContext);
@@ -37,18 +47,24 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
 
   const matchOptions = matches;
   const groupOptions = groups;
+  const typeOptions = types;
 
   getAuth();
 
   const onChange = (e, propName) => {
     setModel({
       ...model,
-      [propName]: propName !== "time" ? e.target.value : e,
+      [propName]:
+        propName === "time"
+          ? e
+          : propName === "initialValue"
+          ? e.target.checked
+          : e.target.value,
     });
   };
 
   const submit = async () => {
-    await addDoc(collection(db, "volleyball"), model);
+    await addDoc(collection(db, path), model);
     await resetModal();
   };
 
@@ -66,12 +82,12 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
   };
 
   const editItem = async () => {
-    await setDoc(doc(db, "volleyball", selectedId), model);
+    await setDoc(doc(db, path, selectedId), model);
     await resetModal();
   };
 
   const deleteItem = async () => {
-    await deleteDoc(doc(db, "volleyball", selectedId));
+    await deleteDoc(doc(db, path, selectedId));
     setSelectedId("");
     setIsConfirmOpen(false);
     await fetchFunction();
@@ -79,15 +95,7 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
 
   const resetModal = async (skipFetching = false) => {
     setIsOpen(false);
-    setModel({
-      awayName: "",
-      awayNum: "",
-      groupNum: null,
-      homeName: "",
-      homeNum: "",
-      matchNum: null,
-      time: new Date(),
-    });
+    setModel(!genderSelect ? entryModel : { ...entryModel, gender: gender });
     setSelectedId("");
     if (skipFetching) return;
     await fetchFunction();
@@ -227,6 +235,13 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
             value={model.groupNum}
             onChange={(e) => onChange(e, "groupNum")}
           />
+          <Select
+            id={`entry-type-select`}
+            label={`Tip unosa utakmice`}
+            options={typeOptions}
+            value={model.entryType}
+            onChange={(e) => onChange(e, "entryType")}
+          />
           <div className={`react-datetime-picker__container`}>
             <span>Pocetak utakmice:</span>
             <DateTimePicker
@@ -234,6 +249,7 @@ export default function AdminTable({ dataMapping, data, fetchFunction }) {
               value={model.time}
             />
           </div>
+
           <br></br>
         </div>
         <div className={`modal-action`}>

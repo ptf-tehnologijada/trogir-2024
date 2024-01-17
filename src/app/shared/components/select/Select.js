@@ -4,7 +4,7 @@ export default function Select(props) {
   return (
     <>
       <div>
-        <label for={props.id}>{props.label}:</label>
+        <label htmlFor={props.id}>{props.label}:</label>
         <select
           id={props.id}
           className={"c-select"}
@@ -15,7 +15,11 @@ export default function Select(props) {
         >
           {props.options &&
             props.options.map((option) => {
-              return <option value={option.id}>{option.text}</option>;
+              return (
+                <option key={option.id} value={option.id}>
+                  {option.text}
+                </option>
+              );
             })}
         </select>
       </div>

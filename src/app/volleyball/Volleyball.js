@@ -22,7 +22,7 @@ const Volleyball = () => {
   }, [db]);
 
   useEffect(() => {
-    fetchData(db, "volleyball", setData, mockData);
+    fetchData(db, "volleyball", setData, false, mockData);
   }, [db, getData]);
 
   return (

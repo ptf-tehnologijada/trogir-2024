@@ -18,6 +18,10 @@ export const calculateTotalPoints = (matches) => {
       teamStats[awayTeam] = { points: 0, wins: 0, draws: 0 };
     }
 
+    if (match.entryType === 1) {
+      return;
+    }
+
     if (homeGoals > awayGoals) {
       // Home team wins
       teamStats[homeTeam].points += pointsForWin;

@@ -10,14 +10,14 @@ import { useCallback, useEffect, useState } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
 
-const AdminVolleyball = () => {
+const AdminFutsal = () => {
   const [data, setData] = useState([]);
 
   const app = useContext(FsContext);
 
   const db = getFirestore(app);
 
-  const db_path = "volleyball";
+  const db_path = "basketball";
 
   const dataMapping = [
     {
@@ -68,7 +68,9 @@ const AdminVolleyball = () => {
         ...doc.data(),
       }));
 
-      setData(fetchedData);
+      const groupedData = Object.groupBy(fetchedData, ({ gender }) => gender);
+
+      setData(groupedData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -81,16 +83,29 @@ const AdminVolleyball = () => {
   return (
     <>
       <div>
-        <h1>{`Odbojka`}</h1>
+        <h1>{`Futsal (M)`}</h1>
         <AdminTable
-          data={data}
+          data={data[2]}
           dataMapping={dataMapping}
           fetchFunction={fetchData}
           path={db_path}
+          genderSelect={true}
+          gender={2}
+        />
+      </div>
+      <div>
+        <h1>{`Futsal (Ž)`}</h1>
+        <AdminTable
+          data={data[3]}
+          dataMapping={dataMapping}
+          fetchFunction={fetchData}
+          path={db_path}
+          genderSelect={true}
+          gender={3}
         />
       </div>
     </>
   );
 };
 
-export default AdminVolleyball;
+export default AdminFutsal;

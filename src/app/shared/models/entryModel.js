@@ -1,9 +1,10 @@
 export const entryModel = {
   awayName: "",
   awayNum: "",
-  groupNum: null,
+  groupNum: 1,
   homeName: "",
   homeNum: "",
-  matchNum: null,
+  matchNum: 1,
   time: new Date(),
+  entryType: 1,
 };

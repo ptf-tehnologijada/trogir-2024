@@ -14,6 +14,9 @@ import AdminLogin from "./app/adminLogin/AdminLogin";
 import { createContext } from "react";
 import { initializeApp } from "firebase/app";
 import AdminVolleyball from "./app/adminVolleyball/AdminVolleyball";
+import AdminPingPong from "./app/adminPingPong/adminPingPong";
+import AdminBasketball from "./app/adminBasketball/AdminBasketball";
+import AdminFutsal from "./app/adminFutsal/AdminFutsal";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -76,15 +79,15 @@ const router = createBrowserRouter(
         },
         {
           path: "/admin/futsal",
-          element: <Futsal />,
+          element: <AdminFutsal />,
         },
         {
           path: "/admin/stolni-tenis",
-          element: <PingPong />,
+          element: <AdminPingPong />,
         },
         {
           path: "/admin/kosarka",
-          element: <Basketball />,
+          element: <AdminBasketball />,
         },
         {
           path: "/admin/kros",

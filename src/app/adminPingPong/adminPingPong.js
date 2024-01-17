@@ -10,14 +10,14 @@ import { useCallback, useEffect, useState } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
 
-const AdminVolleyball = () => {
+const AdminPingPong = () => {
   const [data, setData] = useState([]);
 
   const app = useContext(FsContext);
 
   const db = getFirestore(app);
 
-  const db_path = "volleyball";
+  const db_path = "ping_pong";
 
   const dataMapping = [
     {
@@ -81,7 +81,7 @@ const AdminVolleyball = () => {
   return (
     <>
       <div>
-        <h1>{`Odbojka`}</h1>
+        <h1>{`Stolni tenis`}</h1>
         <AdminTable
           data={data}
           dataMapping={dataMapping}
@@ -93,4 +93,4 @@ const AdminVolleyball = () => {
   );
 };
 
-export default AdminVolleyball;
+export default AdminPingPong;
