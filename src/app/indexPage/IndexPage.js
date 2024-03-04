@@ -21,12 +21,12 @@ const IndexPage = () => {
         }}
       >
         <img
-          src="http://localhost:3000/trogir-2024/ptf_logo.png"
+          src="https://ptf-tehnologijada.github.io/trogir-2024/ptf_logo.png"
           alt="PTF logo"
           width={250}
         ></img>
         <img
-          src="http://localhost:3000/trogir-2024/tehno_logo.jpg"
+          src="https://ptf-tehnologijada.github.io/trogir-2024/tehno_logo.jpg"
           alt="Tehno logo"
           width={250}
         ></img>
