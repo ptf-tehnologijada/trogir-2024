@@ -25,6 +25,7 @@ import { groups } from "../../constants/groupOptions";
 import { matches } from "../../constants/matchOptions";
 import { types } from "../../constants/typeOptions";
 import ConfirmModal from "../confirmModal/ConfirmModal";
+import { entryModelSoloSport } from "../../models/entryModelSoloSport";
 
 export default function AdminTable({
   dataMapping,
@@ -33,12 +34,21 @@ export default function AdminTable({
   path,
   genderSelect = false,
   gender = 1,
+  isSoloSport = false,
+  showGenerate = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSoloSportOpen, setIsSoloSportOpen] = useState(false);
+  const [isGenerateOpen, setIsGenerateOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [model, setModel] = useState(
-    !genderSelect ? entryModel : { ...entryModel, gender: gender }
+    !genderSelect
+      ? entryModel
+      : !isSoloSport
+      ? { ...entryModel, gender: gender }
+      : { ...entryModelSoloSport, gender: gender }
   );
+  const [faculties, setFaculties] = useState("");
   const [selectedId, setSelectedId] = useState("");
 
   const app = useContext(FsContext);
@@ -64,16 +74,19 @@ export default function AdminTable({
   };
 
   const submit = async () => {
+    console.log(model);
     await addDoc(collection(db, path), model);
     await resetModal();
   };
 
   const edit = (item) => {
-    let model = { ...item, time: new Date(item.time.seconds * 1000) };
+    let model = !isSoloSport
+      ? { ...item, time: new Date(item.time.seconds * 1000) }
+      : item;
     setSelectedId(item.id);
     delete model.id;
     setModel(model);
-    setIsOpen(true);
+    !isSoloSport ? setIsOpen(true) : setIsSoloSportOpen(true);
   };
 
   const openDelete = (id) => {
@@ -94,11 +107,53 @@ export default function AdminTable({
   };
 
   const resetModal = async (skipFetching = false) => {
-    setIsOpen(false);
-    setModel(!genderSelect ? entryModel : { ...entryModel, gender: gender });
+    !isSoloSport ? setIsOpen(false) : setIsSoloSportOpen(false);
+    setModel(
+      !genderSelect
+        ? entryModel
+        : !isSoloSport
+        ? { ...entryModel, gender: gender }
+        : { ...entryModelSoloSport, gender: gender }
+    );
     setSelectedId("");
     if (skipFetching) return;
     await fetchFunction();
+  };
+
+  const generate = async () => {
+    const teams = faculties.split(",");
+    const matches = [];
+
+    // Iterate through each team
+    for (let i = 0; i < teams.length; i++) {
+      // Iterate through remaining teams
+      for (let j = i + 1; j < teams.length; j++) {
+        // Create match object
+        const match = {
+          awayName: teams[j],
+          awayNum: "-",
+          groupNum: 1,
+          homeName: teams[i],
+          homeNum: "-",
+          matchNum: 1,
+          time: new Date(),
+          entryType: 1,
+        };
+
+        // Push match object into matches array
+        matches.push(match);
+      }
+    }
+
+    await Promise.all(
+      matches.map(async (match, index) => {
+        await addDoc(collection(db, path), match);
+      })
+    );
+
+    console.log(matches);
+
+    return matches;
   };
 
   const conditionalRow = (item, map) => {
@@ -147,10 +202,19 @@ export default function AdminTable({
             {dataMapping &&
               dataMapping.map((map) => <th key={map.id}>{map.text}</th>)}
             <th align="center">
+              {showGenerate && (
+                <Button
+                  type="ternary"
+                  text="Generiraj"
+                  onClick={() => setIsGenerateOpen(true)}
+                />
+              )}
               <Button
                 type="ternary"
                 text="Kreiraj"
-                onClick={() => setIsOpen(true)}
+                onClick={() =>
+                  !isSoloSport ? setIsOpen(true) : setIsSoloSportOpen(true)
+                }
               />
             </th>
           </tr>
@@ -195,29 +259,29 @@ export default function AdminTable({
         <div className="modal-container">
           <Input
             id={`home-name-input`}
-            label={`Domaci`}
-            placeholder={`Unesite naziv domaceg tima`}
+            label={`Domaći`}
+            placeholder={`Unesite naziv domaćeg tima`}
             value={model.homeName}
             onChange={(e) => onChange(e, "homeName")}
           />
           <Input
             id={`away-name-input`}
-            label={`Gostujuci`}
-            placeholder={`Unesite naziv gostujuceg tima`}
+            label={`Gostujući`}
+            placeholder={`Unesite naziv gostujućeg tima`}
             value={model.awayName}
             onChange={(e) => onChange(e, "awayName")}
           />
           <Input
             id={`home-points-input`}
-            label={`Domaci poeni`}
-            placeholder={`Unesite poene domaceg tima`}
+            label={`Domaći poeni`}
+            placeholder={`Unesite poene domaćeg tima`}
             value={model.homeNum}
             onChange={(e) => onChange(e, "homeNum")}
           />
           <Input
             id={`away-points-input`}
-            label={`Gostujuci poeni`}
-            placeholder={`Unesite poene gostujuceg tima`}
+            label={`Gostujući poeni`}
+            placeholder={`Unesite poene gostujućeg tima`}
             value={model.awayNum}
             onChange={(e) => onChange(e, "awayNum")}
           />
@@ -243,7 +307,7 @@ export default function AdminTable({
             onChange={(e) => onChange(e, "entryType")}
           />
           <div className={`react-datetime-picker__container`}>
-            <span>Pocetak utakmice:</span>
+            <span>Početak utakmice:</span>
             <DateTimePicker
               onChange={(e) => onChange(e, "time")}
               value={model.time}
@@ -257,6 +321,66 @@ export default function AdminTable({
             text={!selectedId ? "Kreiraj" : "Uredi"}
             onClick={!selectedId ? submit : editItem}
           />
+        </div>
+      </Modal>
+
+      <Modal
+        open={isSoloSportOpen}
+        onClose={() => {
+          resetModal(true);
+        }}
+        center
+      >
+        <div className="modal-container">
+          <Input
+            id={`faculty-input`}
+            label={`Fakultet`}
+            placeholder={`Unesi naziv fakulteta`}
+            value={model.faculty}
+            onChange={(e) => onChange(e, "faculty")}
+          />
+          <Input
+            id={`name-input`}
+            label={`Sportaš/ica`}
+            placeholder={`Unesi ime i prezime sportaša/ice`}
+            value={model.name}
+            onChange={(e) => onChange(e, "name")}
+          />
+          <Input
+            id={`time-input`}
+            label={`Vrijeme`}
+            placeholder={`Unesite vrijeme`}
+            value={model.time_solo}
+            onChange={(e) => onChange(e, "time_solo")}
+          />
+        </div>
+        <div className={`modal-action`}>
+          <Button
+            text={!selectedId ? "Kreiraj" : "Uredi"}
+            onClick={!selectedId ? submit : editItem}
+          />
+        </div>
+      </Modal>
+
+      <Modal
+        open={isGenerateOpen}
+        onClose={() => {
+          setFaculties("");
+          setIsGenerateOpen(false);
+        }}
+        center
+      >
+        <div className="modal-container">
+          <Input
+            id={`generate-input`}
+            label={`Fakulteti`}
+            placeholder={`Unesi nazive fakulteta`}
+            value={faculties}
+            onChange={(e) => setFaculties(e.target.value)}
+          />
+        </div>
+        <div className={`modal-action`}>
+          <Button text={`Generiraj`} onClick={generate} />
         </div>
       </Modal>
 

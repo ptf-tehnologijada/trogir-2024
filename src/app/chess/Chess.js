@@ -3,10 +3,10 @@ import { getFirestore } from "firebase/firestore";
 import { useState, useEffect, useCallback } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
+import { calculateTotalPoints } from "../shared/utils/calculateTotalPoints";
 import { fetchData } from "../shared/hooks/useFetchData";
-import { genderEnum } from "../shared/constants/genderEnum";
 
-const Cross = () => {
+const Chess = () => {
   const [data, setData] = useState(null);
 
   const app = useContext(FsContext);
@@ -14,35 +14,23 @@ const Cross = () => {
   const db = getFirestore(app);
 
   const getData = useCallback(() => {
-    fetchData(db, "cross", setData);
+    fetchData(db, "chess", setData);
   }, [db]);
 
   useEffect(() => {
-    fetchData(db, "cross", setData, true, false, true);
+    fetchData(db, "chess", setData);
   }, [db, getData]);
 
   return (
     <>
       <div>
-        <h1>{`Kros (M)`}</h1>
+        <h1>Šah</h1>
 
-        {data?.[genderEnum.male] && (
+        {data && (
           <Table
-            data={data?.[genderEnum.male]}
+            data={calculateTotalPoints(data[1])}
             showAdditional={false}
-            isOnePerson={true}
-          />
-        )}
-      </div>
-
-      <div>
-        <h1>{`Kros (Ž)`}</h1>
-
-        {data?.[genderEnum.female] && (
-          <Table
-            data={data?.[genderEnum.female]}
-            showAdditional={false}
-            isOnePerson={true}
+            hideDraw={true}
           />
         )}
       </div>
@@ -50,4 +38,4 @@ const Cross = () => {
   );
 };
 
-export default Cross;
+export default Chess;

@@ -1,4 +1,4 @@
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { mockData } from "../models/mockData";
 import _ from "lodash";
 
@@ -7,7 +7,8 @@ export const fetchData = async (
   path,
   setData,
   groupByGender = false,
-  mockRequest = false
+  mockRequest = false,
+  isSoloSport = false
 ) => {
   if (mockRequest) {
     console.log("mock request");
@@ -15,6 +16,24 @@ export const fetchData = async (
     return;
   }
   try {
+    let groupedData;
+
+    if (isSoloSport) {
+      const querySnapshot = await getDocs(
+        query(collection(db, path), orderBy("time_solo", "asc"))
+      );
+
+      const fetchedData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      groupedData = _.groupBy(fetchedData, "gender");
+      setData(groupedData);
+      console.log(groupedData);
+      return;
+    }
+
     console.log("real request");
     const querySnapshot = await getDocs(collection(db, path));
 
@@ -22,8 +41,6 @@ export const fetchData = async (
       id: doc.id,
       ...doc.data(),
     }));
-
-    let groupedData;
 
     if (groupByGender) {
       // Group by gender first, and then by matchNum within each gender group
@@ -40,7 +57,7 @@ export const fetchData = async (
 
     // const groupedData = Object.groupBy(fetchedData, ({ matchNum }) => matchNum);
 
-    console.log(groupedData);
+    console.log("ovo", groupedData);
 
     setData(groupedData);
   } catch (error) {

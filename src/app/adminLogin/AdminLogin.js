@@ -18,6 +18,7 @@ export default function AdminLogin() {
       .then((userCredential) => {
         // Signed in
         // ...
+        localStorage.setItem("tehnologijada_logged_in", true);
         navigate("/admin/odbojka");
       })
       .catch((error) => {
@@ -29,7 +30,7 @@ export default function AdminLogin() {
     <>
       <section className={"login-form"}>
         <div className={"login-form__card"}>
-          <h1>Unesite svoj email i lozinku:</h1>
+          <h1>Unesi svoj email i lozinku:</h1>
           <div className={"login-form__input"}>
             <Input
               label={`Email`}

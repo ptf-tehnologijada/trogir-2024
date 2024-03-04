@@ -1,37 +1,53 @@
 import Table from "../shared/components/table/Table";
+import { getFirestore } from "firebase/firestore";
+import { useState, useEffect, useCallback } from "react";
+import { useContext } from "react";
+import { FsContext } from "../../index";
+import { fetchData } from "../shared/hooks/useFetchData";
+import { genderEnum } from "../shared/constants/genderEnum";
 
-export default function Swimming() {
-  const dataMen = [
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Marko Mrulic", time: "4:12:01" },
-  ];
+const Swimming = () => {
+  const [data, setData] = useState(null);
 
-  const dataWomen = [
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-    { faculty: "FKIT", name: "Ivana Brlic Mazuranic", time: "4:12:01" },
-  ];
+  const app = useContext(FsContext);
+
+  const db = getFirestore(app);
+
+  const getData = useCallback(() => {
+    fetchData(db, "swimming", setData);
+  }, [db]);
+
+  useEffect(() => {
+    fetchData(db, "swimming", setData, true, false, true);
+  }, [db, getData]);
 
   return (
     <>
       <div>
         <h1>{`Plivanje (M)`}</h1>
-        <Table data={dataMen} isOnePerson />
 
+        {data?.[genderEnum.male] && (
+          <Table
+            data={data?.[genderEnum.male]}
+            showAdditional={false}
+            isOnePerson={true}
+          />
+        )}
+      </div>
+
+      <div>
         <h1>{`Plivanje (Ž)`}</h1>
-        <Table data={dataWomen} isOnePerson />
+
+        {data?.[genderEnum.female] && (
+          <Table
+            data={data?.[genderEnum.female]}
+            showAdditional={false}
+            isOnePerson={true}
+          />
+        )}
       </div>
     </>
   );
-}
+};
+
+export default Swimming;

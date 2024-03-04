@@ -17,6 +17,11 @@ import AdminVolleyball from "./app/adminVolleyball/AdminVolleyball";
 import AdminPingPong from "./app/adminPingPong/adminPingPong";
 import AdminBasketball from "./app/adminBasketball/AdminBasketball";
 import AdminFutsal from "./app/adminFutsal/AdminFutsal";
+import AdminCross from "./app/adminCross/AdminCross";
+import AdminSwimming from "./app/adminSwimming/AdminSwimming";
+import AdminChees from "./app/adminChess/AdminChess";
+import Chess from "./app/chess/Chess";
+import IndexPage from "./app/indexPage/IndexPage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -38,7 +43,7 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/",
-          element: <div>Dobrodosli</div>,
+          element: <IndexPage />,
         },
         {
           path: "/odbojka",
@@ -63,6 +68,10 @@ const router = createBrowserRouter(
         {
           path: "/plivanje",
           element: <Swimming />,
+        },
+        {
+          path: "/sah",
+          element: <Chess />,
         },
       ],
     },
@@ -91,11 +100,15 @@ const router = createBrowserRouter(
         },
         {
           path: "/admin/kros",
-          element: <Cross />,
+          element: <AdminCross />,
         },
         {
           path: "/admin/plivanje",
-          element: <Swimming />,
+          element: <AdminSwimming />,
+        },
+        {
+          path: "/admin/sah",
+          element: <AdminChees />,
         },
       ],
     },

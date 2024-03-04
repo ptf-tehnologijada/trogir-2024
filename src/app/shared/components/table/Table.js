@@ -33,14 +33,14 @@ export default function Table({
               return (
                 <tr key={index}>
                   <td>
-                    <b>{item.team}</b>
+                    <b>{!isOnePerson ? item.team : item.faculty}</b>
                   </td>
                   {isOnePerson && (
                     <td>
                       <b>{item.name}</b>
                     </td>
                   )}
-                  {isOnePerson && <td>{item.time}</td>}
+                  {isOnePerson && <td>{item.time_solo}</td>}
                   {!isOnePerson && <td>{item.wins}</td>}
                   {!isOnePerson && !hideDraw && <td>{item.draws}</td>}
                   {!isOnePerson && <td>{item.points}</td>}
