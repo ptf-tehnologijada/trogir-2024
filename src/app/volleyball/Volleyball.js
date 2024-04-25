@@ -8,7 +8,6 @@ import { calculateTotalPoints } from "../shared/utils/calculateTotalPoints";
 import { matchEnum } from "../shared/constants/matchEnum";
 import { groupEnum } from "../shared/constants/groupEnum";
 import { fetchData } from "../shared/hooks/useFetchData";
-import { mockData } from "../shared/models/mockData";
 
 const Volleyball = () => {
   const [data, setData] = useState(null);
