@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
 
-const AdminPingPong = () => {
+const AdminChees = () => {
   const [data, setData] = useState([]);
 
   const app = useContext(FsContext);
@@ -21,46 +21,21 @@ const AdminPingPong = () => {
 
   const dataMapping = [
     {
-      text: "Domaci tim",
-      key: "homeName",
+      text: "Fakultet",
+      key: "faculty",
       id: 1,
     },
     {
-      text: "Domaci poeni",
-      key: "homeNum",
-      id: 2,
-    },
-    {
-      text: "Gostujuci tim",
-      key: "awayName",
-      id: 3,
-    },
-    {
-      text: "Gostujuci poeni",
-      key: "awayNum",
-      id: 4,
-    },
-    {
-      text: "Dio natjecanja",
-      key: "matchNum",
+      text: "Bodovi",
+      key: "time_solo",
       id: 5,
-    },
-    {
-      text: "Grupa",
-      key: "groupNum",
-      id: 6,
-    },
-    {
-      text: "Vrijeme",
-      key: "time",
-      id: 7,
     },
   ];
 
   const fetchData = useCallback(async () => {
     try {
       const querySnapshot = await getDocs(
-        query(collection(db, db_path), orderBy("matchNum", "asc"))
+        query(collection(db, db_path), orderBy("time_solo", "desc"))
       );
 
       const fetchedData = querySnapshot.docs.map((doc) => ({
@@ -87,10 +62,13 @@ const AdminPingPong = () => {
           dataMapping={dataMapping}
           fetchFunction={fetchData}
           path={db_path}
+          showGenerate={false}
+          isSoloSport={true}
+          onlyPoints={true}
         />
       </div>
     </>
   );
 };
 
-export default AdminPingPong;
+export default AdminChees;

@@ -26,24 +26,28 @@ const Swimming = () => {
       <div>
         <h1>{`Plivanje (M)`}</h1>
 
-        {data?.[genderEnum.male] && (
+        {data?.[genderEnum.male] ? (
           <Table
             data={data?.[genderEnum.male]}
             showAdditional={false}
             isOnePerson={true}
           />
+        ) : (
+          <Table data={null} showAdditional={false} isOnePerson={true} />
         )}
       </div>
 
       <div>
         <h1>{`Plivanje (Ž)`}</h1>
 
-        {data?.[genderEnum.female] && (
+        {data?.[genderEnum.female] ? (
           <Table
             data={data?.[genderEnum.female]}
             showAdditional={false}
             isOnePerson={true}
           />
+        ) : (
+          <Table data={null} showAdditional={false} isOnePerson={true} />
         )}
       </div>
     </>

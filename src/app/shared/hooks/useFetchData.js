@@ -8,10 +8,10 @@ export const fetchData = async (
   setData,
   groupByGender = false,
   mockRequest = false,
-  isSoloSport = false
+  isSoloSport = false,
+  exactPoints = false
 ) => {
   if (mockRequest) {
-    console.log("mock request");
     setData(mockData);
     return;
   }
@@ -20,7 +20,10 @@ export const fetchData = async (
 
     if (isSoloSport) {
       const querySnapshot = await getDocs(
-        query(collection(db, path), orderBy("time_solo", "asc"))
+        query(
+          collection(db, path),
+          orderBy("time_solo", !exactPoints ? "asc" : "desc")
+        )
       );
 
       const fetchedData = querySnapshot.docs.map((doc) => ({
@@ -30,11 +33,9 @@ export const fetchData = async (
 
       groupedData = _.groupBy(fetchedData, "gender");
       setData(groupedData);
-      console.log(groupedData);
       return;
     }
 
-    console.log("real request");
     const querySnapshot = await getDocs(collection(db, path));
 
     const fetchedData = querySnapshot.docs.map((doc) => ({
@@ -56,8 +57,6 @@ export const fetchData = async (
     // console.log(fetchedData);
 
     // const groupedData = Object.groupBy(fetchedData, ({ matchNum }) => matchNum);
-
-    console.log("ovo", groupedData);
 
     setData(groupedData);
   } catch (error) {

@@ -51,8 +51,6 @@ const AdminSwimming = () => {
       const groupedData = Object.groupBy(fetchedData, ({ gender }) => gender);
 
       setData(groupedData);
-
-      console.log(fetchedData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

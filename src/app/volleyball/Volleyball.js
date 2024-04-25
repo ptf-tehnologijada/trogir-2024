@@ -22,7 +22,7 @@ const Volleyball = () => {
   }, [db]);
 
   useEffect(() => {
-    fetchData(db, "volleyball", setData, false, mockData);
+    fetchData(db, "volleyball", setData, false);
   }, [db, getData]);
 
   return (
@@ -30,7 +30,7 @@ const Volleyball = () => {
       <div>
         <h1>Odbojka</h1>
 
-        {data && (
+        {data && data[matchEnum.groupStage] ? (
           <Table
             tag="G1"
             data={calculateTotalPoints(
@@ -44,9 +44,11 @@ const Volleyball = () => {
             showAdditional={true}
             hideDraw={true}
           />
+        ) : (
+          <Table tag="G1" data={null} showAdditional={false} />
         )}
 
-        {data && (
+        {data && data[matchEnum.groupStage] ? (
           <Table
             tag="G2"
             data={calculateTotalPoints(
@@ -60,37 +62,57 @@ const Volleyball = () => {
             showAdditional={true}
             hideDraw={true}
           />
+        ) : (
+          <Table tag="G2" data={null} showAdditional={false} />
         )}
 
         <h2>Za 7. mjesto</h2>
-        {data &&
+        {data && data[matchEnum.seventhPlace] ? (
           data[matchEnum.seventhPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Za 5. mjesto</h2>
-        {data &&
+        {data && data[matchEnum.fiftPlace] ? (
           data[matchEnum.fiftPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Polufinale</h2>
-        {data &&
+        {data && data[matchEnum.semifinal] ? (
           data[matchEnum.semifinal].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <>
+            <ResultCard data={null} />
+            <ResultCard data={null} />
+          </>
+        )}
 
         <h2>Za 3. mjesto</h2>
-        {data &&
+        {data && data[matchEnum.thirdPlace] ? (
           data[matchEnum.thirdPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Finale</h2>
-        {data &&
+        {data && data[matchEnum.final] ? (
           data[matchEnum.final].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
       </div>
     </>
   );

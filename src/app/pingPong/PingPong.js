@@ -1,15 +1,11 @@
-import ResultCard from "../shared/components/resultCard/ResultCard";
 import Table from "../shared/components/table/Table";
 import { getFirestore } from "firebase/firestore";
 import { useState, useEffect, useCallback } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
-import { calculateTotalPoints } from "../shared/utils/calculateTotalPoints";
-import { matchEnum } from "../shared/constants/matchEnum";
-import { groupEnum } from "../shared/constants/groupEnum";
 import { fetchData } from "../shared/hooks/useFetchData";
 
-const PingPong = () => {
+const Chess = () => {
   const [data, setData] = useState(null);
 
   const app = useContext(FsContext);
@@ -17,11 +13,11 @@ const PingPong = () => {
   const db = getFirestore(app);
 
   const getData = useCallback(() => {
-    fetchData(db, "ping_pong", setData);
+    fetchData(db, "ping_pong", setData, false, false, true, true);
   }, [db]);
 
   useEffect(() => {
-    fetchData(db, "ping_pong", setData, false, true);
+    fetchData(db, "ping_pong", setData, false, false, true, true);
   }, [db, getData]);
 
   return (
@@ -29,70 +25,26 @@ const PingPong = () => {
       <div>
         <h1>Stolni tenis</h1>
 
-        {data && (
+        {data && data[undefined] ? (
           <Table
-            tag="G1"
-            data={calculateTotalPoints(
-              data[matchEnum.groupStage].filter(
-                (item) => item.groupNum === groupEnum.firstGroup
-              )
-            )}
-            showAdditional={true}
-            matches={data[matchEnum.groupStage].filter(
-              (item) => item.groupNum === groupEnum.firstGroup
-            )}
+            data={data[undefined]}
+            showAdditional={false}
             hideDraw={true}
+            isOnePerson={true}
+            onlyPoints={true}
+          />
+        ) : (
+          <Table
+            data={null}
+            showAdditional={false}
+            hideDraw={true}
+            isOnePerson={true}
+            onlyPoints={true}
           />
         )}
-
-        {data && (
-          <Table
-            tag="G2"
-            data={calculateTotalPoints(
-              data[matchEnum.groupStage].filter(
-                (item) => item.groupNum === groupEnum.secondGroup
-              )
-            )}
-            showAdditional={true}
-            matches={data[matchEnum.groupStage].filter(
-              (item) => item.groupNum === groupEnum.secondGroup
-            )}
-            hideDraw={true}
-          />
-        )}
-
-        <h2>Za 7. mjesto</h2>
-        {data &&
-          data[matchEnum.seventhPlace].map((item) => (
-            <ResultCard key={item.id} data={item} />
-          ))}
-
-        <h2>Za 5. mjesto</h2>
-        {data &&
-          data[matchEnum.fiftPlace].map((item) => (
-            <ResultCard key={item.id} data={item} />
-          ))}
-
-        <h2>Polufinale</h2>
-        {data &&
-          data[matchEnum.semifinal].map((item) => (
-            <ResultCard key={item.id} data={item} />
-          ))}
-
-        <h2>Za 3. mjesto</h2>
-        {data &&
-          data[matchEnum.thirdPlace].map((item) => (
-            <ResultCard key={item.id} data={item} />
-          ))}
-
-        <h2>Finale</h2>
-        {data &&
-          data[matchEnum.final].map((item) => (
-            <ResultCard key={item.id} data={item} />
-          ))}
       </div>
     </>
   );
 };
 
-export default PingPong;
+export default Chess;

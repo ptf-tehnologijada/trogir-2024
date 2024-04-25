@@ -10,7 +10,7 @@ import { groupEnum } from "../shared/constants/groupEnum";
 import { fetchData } from "../shared/hooks/useFetchData";
 import { genderEnum } from "../shared/constants/genderEnum";
 
-const Basketball = () => {
+const Futsal = () => {
   const [data, setData] = useState(null);
 
   const app = useContext(FsContext);
@@ -30,7 +30,7 @@ const Basketball = () => {
       <div>
         <h1>{`Futsal (M)`}</h1>
 
-        {data?.[genderEnum.male]?.[matchEnum.groupStage] && (
+        {data?.[genderEnum.male]?.[matchEnum.groupStage] ? (
           <Table
             tag="G1"
             data={calculateTotalPoints(
@@ -43,9 +43,11 @@ const Basketball = () => {
               (item) => item.groupNum === groupEnum.firstGroup
             )}
           />
+        ) : (
+          <Table tag="G1" data={null} showAdditional={false} />
         )}
 
-        {data?.[genderEnum.male]?.[matchEnum.groupStage] && (
+        {data?.[genderEnum.male]?.[matchEnum.groupStage] ? (
           <Table
             tag="G2"
             data={calculateTotalPoints(
@@ -58,43 +60,63 @@ const Basketball = () => {
               (item) => item.groupNum === groupEnum.secondGroup
             )}
           />
+        ) : (
+          <Table tag="G2" data={null} showAdditional={false} />
         )}
 
         <h2>Za 7. mjesto</h2>
-        {data?.[genderEnum.male]?.[matchEnum.seventhPlace] &&
+        {data?.[genderEnum.male]?.[matchEnum.seventhPlace] ? (
           data[genderEnum.male][matchEnum.seventhPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Za 5. mjesto</h2>
-        {data?.[genderEnum.male]?.[matchEnum.fiftPlace] &&
+        {data?.[genderEnum.male]?.[matchEnum.fiftPlace] ? (
           data[genderEnum.male][matchEnum.fiftPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Polufinale</h2>
-        {data?.[genderEnum.male]?.[matchEnum.semifinal] &&
+        {data?.[genderEnum.male]?.[matchEnum.semifinal] ? (
           data[genderEnum.male][matchEnum.semifinal].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <>
+            <ResultCard data={null} />
+            <ResultCard data={null} />
+          </>
+        )}
 
         <h2>Za 3. mjesto</h2>
-        {data?.[genderEnum.male]?.[matchEnum.thirdPlace] &&
+        {data?.[genderEnum.male]?.[matchEnum.thirdPlace] ? (
           data[genderEnum.male][matchEnum.thirdPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Finale</h2>
-        {data?.[genderEnum.male]?.[matchEnum.final] &&
+        {data?.[genderEnum.male]?.[matchEnum.final] ? (
           data[genderEnum.male][matchEnum.final].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
       </div>
 
       <div>
         <h1>{`Futsal (Ž)`}</h1>
 
-        {data?.[genderEnum.female]?.[matchEnum.groupStage] && (
+        {data?.[genderEnum.female]?.[matchEnum.groupStage] ? (
           <Table
             tag="G1"
             data={calculateTotalPoints(
@@ -107,9 +129,11 @@ const Basketball = () => {
               (item) => item.groupNum === groupEnum.firstGroup
             )}
           />
+        ) : (
+          <Table tag="G1" data={null} showAdditional={false} />
         )}
 
-        {data?.[genderEnum.female]?.[matchEnum.groupStage] && (
+        {data?.[genderEnum.female]?.[matchEnum.groupStage] ? (
           <Table
             tag="G2"
             data={calculateTotalPoints(
@@ -122,40 +146,60 @@ const Basketball = () => {
               (item) => item.groupNum === groupEnum.secondGroup
             )}
           />
+        ) : (
+          <Table tag="G2" data={null} showAdditional={false} />
         )}
 
         <h2>Za 7. mjesto</h2>
-        {data?.[genderEnum.female]?.[matchEnum.seventhPlace] &&
+        {data?.[genderEnum.female]?.[matchEnum.seventhPlace] ? (
           data[genderEnum.female][matchEnum.seventhPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Za 5. mjesto</h2>
-        {data?.[genderEnum.female]?.[matchEnum.fiftPlace] &&
+        {data?.[genderEnum.female]?.[matchEnum.fiftPlace] ? (
           data[genderEnum.female][matchEnum.fiftPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Polufinale</h2>
-        {data?.[genderEnum.female]?.[matchEnum.semifinal] &&
+        {data?.[genderEnum.female]?.[matchEnum.semifinal] ? (
           data[genderEnum.female][matchEnum.semifinal].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <>
+            <ResultCard data={null} />
+            <ResultCard data={null} />
+          </>
+        )}
 
         <h2>Za 3. mjesto</h2>
-        {data?.[genderEnum.female]?.[matchEnum.thirdPlace] &&
+        {data?.[genderEnum.female]?.[matchEnum.thirdPlace] ? (
           data[genderEnum.female][matchEnum.thirdPlace].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
 
         <h2>Finale</h2>
-        {data?.[genderEnum.female]?.[matchEnum.final] &&
+        {data?.[genderEnum.female]?.[matchEnum.final] ? (
           data[genderEnum.female][matchEnum.final].map((item) => (
             <ResultCard key={item.id} data={item} />
-          ))}
+          ))
+        ) : (
+          <ResultCard data={null} />
+        )}
       </div>
     </>
   );
 };
 
-export default Basketball;
+export default Futsal;

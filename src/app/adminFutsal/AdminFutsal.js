@@ -17,7 +17,7 @@ const AdminFutsal = () => {
 
   const db = getFirestore(app);
 
-  const db_path = "basketball";
+  const db_path = "futsal";
 
   const dataMapping = [
     {

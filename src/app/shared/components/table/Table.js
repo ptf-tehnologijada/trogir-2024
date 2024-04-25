@@ -11,6 +11,7 @@ export default function Table({
   isOnePerson = false,
   showAdditional = false,
   hideDraw = false,
+  onlyPoints = false,
 }) {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
 
@@ -20,33 +21,45 @@ export default function Table({
         <thead>
           <tr>
             {isOnePerson ? <th>Fakultet</th> : <th>{tag}</th>}
-            {isOnePerson && <th>Sportaš/ica</th>}
-            {isOnePerson && <th>Vrijeme</th>}
+            {isOnePerson && !onlyPoints && <th>Sportaš/ica</th>}
+            {isOnePerson && <th>{!onlyPoints ? "Vrijeme" : "Bodovi"}</th>}
             {!isOnePerson && <th>W</th>}
             {!isOnePerson && !hideDraw && <th>D</th>}
             {!isOnePerson && <th>P</th>}
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((item, index) => {
-              return (
-                <tr key={index}>
-                  <td>
-                    <b>{!isOnePerson ? item.team : item.faculty}</b>
-                  </td>
-                  {isOnePerson && (
+          {data
+            ? data.map((item, index) => {
+                return (
+                  <tr key={index}>
                     <td>
-                      <b>{item.name}</b>
+                      <b>{!isOnePerson ? item.team : item.faculty}</b>
                     </td>
-                  )}
-                  {isOnePerson && <td>{item.time_solo}</td>}
-                  {!isOnePerson && <td>{item.wins}</td>}
-                  {!isOnePerson && !hideDraw && <td>{item.draws}</td>}
-                  {!isOnePerson && <td>{item.points}</td>}
-                </tr>
-              );
-            })}
+                    {isOnePerson && !onlyPoints && (
+                      <td>
+                        <b>{item.name}</b>
+                      </td>
+                    )}
+                    {isOnePerson && <td>{item.time_solo}</td>}
+                    {!isOnePerson && <td>{item.wins}</td>}
+                    {!isOnePerson && !hideDraw && <td>{item.draws}</td>}
+                    {!isOnePerson && <td>{item.points}</td>}
+                  </tr>
+                );
+              })
+            : [1, 2, 3, 4].map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>-</td>
+                    {isOnePerson && <td></td>}
+                    {isOnePerson && !onlyPoints && <td></td>}
+                    {!isOnePerson && <td></td>}
+                    {!isOnePerson && !hideDraw && <td></td>}
+                    {!isOnePerson && <td></td>}
+                  </tr>
+                );
+              })}
         </tbody>
       </table>
       {showAdditional && (

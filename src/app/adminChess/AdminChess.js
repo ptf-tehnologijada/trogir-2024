@@ -21,28 +21,13 @@ const AdminChees = () => {
 
   const dataMapping = [
     {
-      text: "Domaci tim",
-      key: "homeName",
+      text: "Fakultet",
+      key: "faculty",
       id: 1,
     },
     {
-      text: "Domaci poeni",
-      key: "homeNum",
-      id: 2,
-    },
-    {
-      text: "Gostujuci tim",
-      key: "awayName",
-      id: 3,
-    },
-    {
-      text: "Gostujuci poeni",
-      key: "awayNum",
-      id: 4,
-    },
-    {
-      text: "Vrijeme",
-      key: "time",
+      text: "Bodovi",
+      key: "time_solo",
       id: 5,
     },
   ];
@@ -50,7 +35,7 @@ const AdminChees = () => {
   const fetchData = useCallback(async () => {
     try {
       const querySnapshot = await getDocs(
-        query(collection(db, db_path), orderBy("time", "asc"))
+        query(collection(db, db_path), orderBy("time_solo", "desc"))
       );
 
       const fetchedData = querySnapshot.docs.map((doc) => ({
@@ -77,7 +62,9 @@ const AdminChees = () => {
           dataMapping={dataMapping}
           fetchFunction={fetchData}
           path={db_path}
-          showGenerate={true}
+          showGenerate={false}
+          isSoloSport={true}
+          onlyPoints={true}
         />
       </div>
     </>

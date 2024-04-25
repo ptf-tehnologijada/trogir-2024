@@ -36,6 +36,7 @@ export default function AdminTable({
   gender = 1,
   isSoloSport = false,
   showGenerate = false,
+  onlyPoints = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSoloSportOpen, setIsSoloSportOpen] = useState(false);
@@ -74,7 +75,6 @@ export default function AdminTable({
   };
 
   const submit = async () => {
-    console.log(model);
     await addDoc(collection(db, path), model);
     await resetModal();
   };
@@ -150,8 +150,6 @@ export default function AdminTable({
         await addDoc(collection(db, path), match);
       })
     );
-
-    console.log(matches);
 
     return matches;
   };
@@ -339,16 +337,18 @@ export default function AdminTable({
             value={model.faculty}
             onChange={(e) => onChange(e, "faculty")}
           />
-          <Input
-            id={`name-input`}
-            label={`Sportaš/ica`}
-            placeholder={`Unesi ime i prezime sportaša/ice`}
-            value={model.name}
-            onChange={(e) => onChange(e, "name")}
-          />
+          {!onlyPoints && (
+            <Input
+              id={`name-input`}
+              label={`Sportaš/ica`}
+              placeholder={`Unesi ime i prezime sportaša/ice`}
+              value={model.name}
+              onChange={(e) => onChange(e, "name")}
+            />
+          )}
           <Input
             id={`time-input`}
-            label={`Vrijeme`}
+            label={!onlyPoints ? `Vrijeme` : `Bodovi`}
             placeholder={`Unesite vrijeme`}
             value={model.time_solo}
             onChange={(e) => onChange(e, "time_solo")}

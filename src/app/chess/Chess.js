@@ -3,7 +3,6 @@ import { getFirestore } from "firebase/firestore";
 import { useState, useEffect, useCallback } from "react";
 import { useContext } from "react";
 import { FsContext } from "../../index";
-import { calculateTotalPoints } from "../shared/utils/calculateTotalPoints";
 import { fetchData } from "../shared/hooks/useFetchData";
 
 const Chess = () => {
@@ -14,11 +13,11 @@ const Chess = () => {
   const db = getFirestore(app);
 
   const getData = useCallback(() => {
-    fetchData(db, "chess", setData);
+    fetchData(db, "chess", setData, false, false, true, true);
   }, [db]);
 
   useEffect(() => {
-    fetchData(db, "chess", setData);
+    fetchData(db, "chess", setData, false, false, true, true);
   }, [db, getData]);
 
   return (
@@ -26,11 +25,21 @@ const Chess = () => {
       <div>
         <h1>Šah</h1>
 
-        {data && (
+        {data && data[undefined] ? (
           <Table
-            data={calculateTotalPoints(data[1])}
+            data={data[undefined]}
             showAdditional={false}
             hideDraw={true}
+            isOnePerson={true}
+            onlyPoints={true}
+          />
+        ) : (
+          <Table
+            data={null}
+            showAdditional={false}
+            hideDraw={true}
+            isOnePerson={true}
+            onlyPoints={true}
           />
         )}
       </div>
