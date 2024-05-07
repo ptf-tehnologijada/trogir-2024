@@ -1,15 +1,15 @@
 const IndexPage = () => {
   return (
     <>
-      <h1>Dobrodošli</h1>
-      <h2>Tehnologijada 2024.</h2>
-      <h3>Mjesto: Trogir</h3>
-      <h3>Datum održavanja: 14.5-18.5.</h3>
-      <p>
-        Ovdje ćete moći pratiti sve rasporede odigravanja utakmica i rezultate
-        istih.
+      <h1>Tehnologijada 2024.</h1>
+      <h3>Mjesto održavanja: Trogir</h3>
+      <h3>Datum održavanja: 13.5-19.5.</h3>
+      <p style={{ fontSize: "18px", lineHeight: 1.4 }}>
+        Znanstveno-sportski susret studenata i djelatnika s područja:
+        prehrambenih, biotehničkih, grafičkih, kemijskih, metalurških i
+        tekstilnih znanosti s ciljem promicanja tih znanosti i stavljanje
+        naglaska na važnost sporta i rekreacije među studentima.
       </p>
-      <p></p>
       <div
         style={{
           display: "flex",
